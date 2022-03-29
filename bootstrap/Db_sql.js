@@ -1,8 +1,11 @@
+//Ne sert plus
+
 const mysql = require('mysql');
 const dotenv = require('dotenv').config()
 
 const {DB_HOST, DB_USER, DB_PORT, DB_NAME, DB_PASSWORD} = process.env
 
+// Connexion à la base de données MySQL
 module.exports = class Db {
     connection = mysql.createConnection({
         host     : DB_HOST,
@@ -17,7 +20,16 @@ module.exports = class Db {
                 console.error('Error connecting: ' + err.stack);
                 return;
             }
-            console.log('Connected');
+            console.log('Connected to database');
         });
+    }
+    query(sql){
+        this.connection.query(sql, function (err, rows, fields) {
+            if (err) {
+                console.error('Error connecting: ' + err.stack);
+                return;
+            }
+            return rows;
+    })
     }
 }

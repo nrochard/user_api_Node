@@ -1,35 +1,13 @@
 const http = require("http");
-const Db = require("./boostrap/Db");
+const routes = require('./routes/index.js')
 
+
+//Lancement du serveur
 const server = http.createServer((req, res) =>{
-
-    if(req.url == "/"){
-        const db = new Db();
-        db.connect();
-        res.write("hello");
-        res.end();
-    }  
-    else if(req.url == "/get"){
-        res.write("GET");
-        res.end();
-    }  
-    else if(req.url == "/post"){
-        res.write("post");
-        res.end();
-    }  
-    else if(req.url == "/put"){
-        res.write("put");
-        res.end();
-    }  
-    else if(req.url == "/post"){
-        res.write("delete");
-        res.end();
-    }  
-    else{
-        res.write("Not found");
-        res.end();
-    }
+    console.log("Server is working")
+    const newRoutes = new routes(req, res);
 });
 
+//Sur le port 3000
 server.listen(3000);
 
